@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  db:
+    image: mysql:latest
+    ports:
+      - 3307:3306
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: userForge
+      MYSQL_USER: rootAdmin
+      MYSQL_PASSWORD: root
+    volumes:
+      - db_data:/var/lib/mysql  
+
+
+volumes:
+  db_data:
