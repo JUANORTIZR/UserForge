@@ -1,6 +1,14 @@
 version: '3'
 
 services:
+  microservice:
+    build: ./
+    ports:
+      - 8081:8081
+    depends_on:
+      - db
+    hostname: management
+
   db:
     image: mysql:latest
     ports:

@@ -1,5 +1,8 @@
 package com.onekdev.UserForge.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.onekdev.UserForge.domain.model.User;
@@ -31,8 +34,16 @@ public class UserService {
     }
 
     public UserResponse getUserById(Long id) {
-        User user = userRepository.findById(id).orElseThrow(() -> new IllegalStateException());
+        User user = userRepository.findById(id).orElseThrow(() -> new IllegalStateException("No hay usuarios registrados con ese id"));
         return new UserResponse(user);
+    }
+
+    public ArrayList<User> getUsers(){
+        return (ArrayList<User>) userRepository.findAll();
+    }
+
+    public List<User> getCompanies(){
+        return userRepository.findByRol("company").orElseThrow(() -> new IllegalStateException("No hay empresas registradas"));
     }
 
 
