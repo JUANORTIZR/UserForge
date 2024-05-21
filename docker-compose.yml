@@ -19,9 +19,3 @@ services:
       MYSQL_DATABASE: userForge
       MYSQL_USER: rootAdmin
       MYSQL_PASSWORD: root
-    volumes:
-      - db_data:/var/lib/mysql  
-
-
-volumes:
-  db_data:

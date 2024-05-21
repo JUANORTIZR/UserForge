@@ -15,14 +15,24 @@ public class Company extends User{
     private String Description;
     private String CompanyName;
     private Double Rating;
-    private Double AgregatePrice;
+    private Double AggregatePrice;
     private String Address;
 
     public Company(CompanyRequest company){
-        super(company.getID());
+        super(company.getNickname());
         this.Description = company.getDescription();
         this.CompanyName = company.getCompanyName();
-        this.AgregatePrice = company.getAgregatePrice();
+        this.AggregatePrice = company.getAgregatePrice();
+        this.Address = company.getAddress();
+    }
+
+
+    @Override
+    public void merge(User other) {
+        Company company = (Company) other;
+        this.Description = company.getDescription();
+        this.CompanyName = company.getCompanyName();
+        this.AggregatePrice = company.getAggregatePrice();
         this.Address = company.getAddress();
     }
 }

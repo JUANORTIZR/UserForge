@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CompanyRequest {
-    private Long ID;
+    private String Nickname;
     private String Description;
     private String CompanyName;
     private Double AgregatePrice;
