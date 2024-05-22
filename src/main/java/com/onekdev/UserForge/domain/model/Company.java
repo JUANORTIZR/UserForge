@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Formula;
 
 @Data
 @NoArgsConstructor
@@ -14,6 +15,7 @@ public class Company extends User{
 
     private String Description;
     private String CompanyName;
+    @Formula("(select avg(r.Rating) from review r where r.company_id = id)")
     private Double Rating;
     private Double AggregatePrice;
     private String Address;
