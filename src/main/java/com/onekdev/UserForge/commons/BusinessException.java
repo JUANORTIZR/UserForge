@@ -8,10 +8,12 @@ public class BusinessException extends RuntimeException{
 
     private String ClassName;
     private HttpStatus StatusCode;
+    private String Reason;
 
-    public BusinessException(String message, String className, HttpStatus statusCode) {
+    public BusinessException(String message, String className,String reason, HttpStatus statusCode) {
         super(message);
         this.ClassName = className;
         this.StatusCode = statusCode;
+        this.Reason = reason;
     }
 }

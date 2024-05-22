@@ -15,6 +15,7 @@ public class ErrorHandler {
         errorResponse.setMessage(ex.getMessage());
         errorResponse.setCode(ex.getStatusCode());
         errorResponse.setModuleName(ex.getClassName());
+        errorResponse.setReason(ex.getReason());
         return new ResponseEntity<>(errorResponse, ex.getStatusCode());
     }
 

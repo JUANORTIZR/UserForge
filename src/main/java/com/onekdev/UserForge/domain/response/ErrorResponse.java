@@ -8,4 +8,5 @@ public class ErrorResponse {
     private String Message;
     private HttpStatus Code;
     private String ModuleName;
+    private String Reason;
 }
