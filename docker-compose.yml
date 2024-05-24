@@ -3,19 +3,32 @@ version: '3'
 services:
   microservice:
     build: ./
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/userForge
+      SPRING_DATASOURCE_PORT: 3306
+      SPRING_DATASOURCE_DATABASE: userForge
+      SPRING_DATASOURCE_USERNAME: rootAdmin
+      SPRING_DATASOURCE_PASSWORD: root
     ports:
       - 8081:8081
     depends_on:
       - db
     hostname: management
+    networks:
+      - public
 
   db:
     image: mysql:latest
     ports:
-      - 3307:3306
+      - 3306:3306
     container_name: mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: userForge
       MYSQL_USER: rootAdmin
       MYSQL_PASSWORD: root
+    hostname: db
+    networks:
+      - public
+networks:
+  public:
