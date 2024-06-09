@@ -1,6 +1,7 @@
 package com.onekdev.UserForge.service;
 
 import com.onekdev.UserForge.commons.BusinessException;
+import com.onekdev.UserForge.config.kafka.MessageProducer;
 import com.onekdev.UserForge.config.mappers.DomiciliaryMapper;
 import com.onekdev.UserForge.domain.model.Domiciliary;
 import com.onekdev.UserForge.domain.request.DomiciliaryRequest;
@@ -19,6 +20,9 @@ public class DomiciliaryService {
 
     @Autowired
     private DomiciliaryMapper domiciliaryMapper;
+
+    @Autowired
+    private MessageProducer messageProducer;
 
     public DomiciliaryService(DomiciliaryRepository domiciliaryRepository) {
         this.domiciliaryRepository = domiciliaryRepository;
@@ -45,7 +49,9 @@ public class DomiciliaryService {
     public Domiciliary createDomiciliary(DomiciliaryRequest domiciliaryRequest){
         try {
              Domiciliary domiciliary = domiciliaryMapper.toDomiciliary(domiciliaryRequest);
-             return domiciliaryRepository.save(domiciliary);
+             domiciliary = domiciliaryRepository.save(domiciliary);
+             messageProducer.sendMessage(domiciliaryMapper.toAuthentication(domiciliaryRequest).toJsonString());
+             return domiciliary;
         }
         catch (Exception e) {
             throw new BusinessException("Error al crear domiciliario",DomiciliaryService.class.getName(), e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);

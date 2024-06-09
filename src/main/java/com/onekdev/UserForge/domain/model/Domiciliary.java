@@ -14,7 +14,9 @@ import java.util.UUID;
 @NoArgsConstructor
 public class Domiciliary extends User{
 
+
     private UUID companyId;
+    private String name;
     private String PlateNumber;
 
     @Override

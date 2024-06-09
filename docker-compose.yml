@@ -9,6 +9,9 @@ services:
       SPRING_DATASOURCE_DATABASE: userForge
       SPRING_DATASOURCE_USERNAME: rootAdmin
       SPRING_DATASOURCE_PASSWORD: root
+      SPRING_HOST_KAFKA: 52.39.113.119
+      SPRING_PORT_KAFKA: 9095
+      SPRING_TOPIC_KAFKA: userToCreate
     ports:
       - 8081:8081
     depends_on:
