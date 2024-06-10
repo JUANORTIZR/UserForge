@@ -11,14 +11,11 @@ import org.springframework.stereotype.Component;
 public class MessageProducer {
 
     private static final Logger log = LoggerFactory.getLogger(MessageProducer.class);
-    @Value("${kafka.topic}")
-    private String topic;
 
     @Autowired
     private KafkaTemplate<String, String> kafkaTemplate;
 
-    public void sendMessage(String message) {
-        log.info(topic);
+    public void sendMessage(String topic,String message) {
         kafkaTemplate.send(topic, message);
     }
 

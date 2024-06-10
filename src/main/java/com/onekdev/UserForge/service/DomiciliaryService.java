@@ -50,7 +50,7 @@ public class DomiciliaryService {
         try {
              Domiciliary domiciliary = domiciliaryMapper.toDomiciliary(domiciliaryRequest);
              domiciliary = domiciliaryRepository.save(domiciliary);
-             messageProducer.sendMessage(domiciliaryMapper.toAuthentication(domiciliaryRequest).toJsonString());
+             messageProducer.sendMessage("toCreate",domiciliaryMapper.toAuthentication(domiciliaryRequest).toJsonString());
              return domiciliary;
         }
         catch (Exception e) {

@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 import com.onekdev.UserForge.commons.BusinessException;
+import com.onekdev.UserForge.config.kafka.MessageProducer;
 import com.onekdev.UserForge.config.mappers.CompanyMapper;
 import com.onekdev.UserForge.domain.model.Company;
+import com.onekdev.UserForge.domain.request.AuthRequest;
 import com.onekdev.UserForge.domain.request.CompanyPatchRequest;
 import com.onekdev.UserForge.domain.request.CompanyRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,9 @@ public class CompanyService {
     @Autowired
     private CompanyMapper companyMapper;
 
+    @Autowired
+    private MessageProducer messageProducer;
+
     public CompanyService(CompanyRepository companyRepository) {
         this.companyRepository = companyRepository;
     }
@@ -32,7 +37,11 @@ public class CompanyService {
 
         Company company = new Company(companyRequest);
         try {
-            return new CompanyResponse(companyRepository.save(company));
+            CompanyResponse response = new CompanyResponse(companyRepository.save(company));
+            AuthRequest authRequest = new AuthRequest();
+            authRequest.setNickname(response.getNickname());
+            messageProducer.sendMessage("toChangeRol",authRequest.toJsonString());
+            return response;
         } catch (Exception e) {
             throw new BusinessException("No se pudo crear la compañia",CompanyService.class.getName(), e.getMessage(),HttpStatus.BAD_REQUEST);
         }
