@@ -1,0 +1,10 @@
+gitops:
+  manifest_projects:
+  - id: unicesarcol/devops/devops-scadena-202401/team1/quickdispatch-team/quickdispatch-managment
+    default_namespace: default
+    paths:
+    - glob: 'manifests/*.{yaml,yml,json}' 
+
+ci_access:
+  groups:
+  - id: unicesarcol/devops/devops-scadena-202401/team1/quickdispatch-team/quickdispatch-managment

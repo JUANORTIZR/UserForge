@@ -9,7 +9,7 @@ services:
       SPRING_DATASOURCE_DATABASE: userForge
       SPRING_DATASOURCE_USERNAME: rootAdmin
       SPRING_DATASOURCE_PASSWORD: root
-      KAFKA_CLUSTER_URL: 52.39.113.119:9092
+      KAFKA_CLUSTER_URL: 35.92.142.241:9092
     ports:
       - 8081:8081
     depends_on:
